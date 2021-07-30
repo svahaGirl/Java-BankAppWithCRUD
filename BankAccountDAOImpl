@@ -1,0 +1,57 @@
+package com.dao;
+
+import java.util.LinkedList;
+import java.util.List;
+
+import com.exceptions.AccountNotFoundException;
+import com.model.bank.BankAccount;
+
+// abstract class can not be initialized.
+public class BankAccountDAOImpl implements BankAccountDAO{
+	
+	List<BankAccount> accountList = new LinkedList<>();
+	
+	@Override
+	public void addNewBankAccount(BankAccount bankAccount) {
+		
+		accountList.add(bankAccount);
+		
+	}
+	@Override
+	public void removeBankAccount(BankAccount bankAccount) {
+		//before deleting the bankAccount object from list, check existence otherwise raise exception
+		
+		if(!accountList.contains(bankAccount)) {
+			try {
+			throw new AccountNotFoundException(bankAccount.getActNumber());
+		} catch(AccountNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+	}
+		accountList.remove(bankAccount);
+		
+	}
+	@Override
+	public void updateBankAccount(BankAccount bankAccount) {
+		if(!accountList.contains(bankAccount)) {
+			try {
+			throw new AccountNotFoundException(bankAccount.getActNumber());
+		} catch(AccountNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("Your account not exist! Please Try again!");
+		}
+		
+	}
+		int index = accountList.indexOf(bankAccount);
+		accountList.set(index, bankAccount);
+		
+	}
+	
+	@Override
+	public List<BankAccount> showAllAccounts() {
+		
+		return accountList;
+	}
+
+}
