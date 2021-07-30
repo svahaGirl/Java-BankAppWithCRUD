@@ -1,0 +1,50 @@
+package com.client;
+
+import java.util.List;
+
+import com.service.ServiceImpl;
+import com.model.bank.BankAccount;
+import com.service.Service;
+
+public class CollectionsMain {
+
+	public static void main(String[] args) {
+		
+		// create service object
+		Service bservice = new ServiceImpl();
+		
+		bservice.addNewBankAccount(new BankAccount(1,"A", 10000));
+		bservice.addNewBankAccount(new BankAccount(2,"B", 12000));
+		bservice.addNewBankAccount(new BankAccount(3,"C", 16000));
+		bservice.addNewBankAccount(new BankAccount(4,"D", 12000));
+		bservice.addNewBankAccount(new BankAccount(5,"E", 10800));
+		bservice.addNewBankAccount(new BankAccount(6,"F", 19000));
+		
+		List<BankAccount> actList = bservice.showAllAccounts();
+		
+		for(BankAccount act : actList){
+			
+			System.out.println(act.getActNumber() + " " + act.getCustomerName() + " " + act.getActBalance());
+		}
+		
+		BankAccount up1 = new BankAccount(1,"Red Hat", 16000);
+		bservice.updateBankAccount(up1);
+		
+		System.out.println("Your updated account detail: ");
+		actList = bservice.showAllAccounts();
+		for(BankAccount act:actList) {
+			System.out.println(act.getActNumber()+ " " + act.getCustomerName()+" " + act.getActBalance());
+		}
+		
+		BankAccount re1 =new BankAccount(1,"Jack Lee", 16000);
+		bservice.removeBankAccount(re1);
+		actList = bservice.showAllAccounts();
+		
+		System.out.println("Your list after remove operaton: ");
+		for(BankAccount act:actList) {
+			System.out.println(act.getActNumber()+ " " + act.getCustomerName()+" " + act.getActBalance());
+		}
+		
+	}
+
+}
