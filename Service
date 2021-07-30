@@ -1,0 +1,15 @@
+package com.service;
+
+import java.util.List;
+import com.model.bank.BankAccount;
+
+public interface Service {
+
+	public abstract void addNewBankAccount(BankAccount bankAccount);
+	public abstract void removeBankAccount(BankAccount bankAcccount);
+	public abstract void updateBankAccount(BankAccount bankAccount);
+	public abstract List<BankAccount> showAllAccounts();
+	
+}
+
+
